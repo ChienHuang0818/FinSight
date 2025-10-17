@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using api.Data; 
-
+using api.Interfaces;
+using api.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Controllers
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Swagger (Swashbuckle)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Repositories
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 

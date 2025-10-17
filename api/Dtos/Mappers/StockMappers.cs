@@ -1,6 +1,6 @@
 
 using api.Dtos.Stock;
-using api.Models;
+
 
 namespace api.Dtos.Mappers
 {
@@ -26,5 +26,15 @@ namespace api.Dtos.Mappers
             Industry = model.Industry,
             MarketCap = model.MarketCap
         };
+
+        public static void UpdateFromDto(this Models.Stock model, UpdateStockDto dto)
+        {
+            model.Symbol = dto.Symbol;
+            model.CompanyName = dto.CompanyName;
+            model.Purchase = dto.Purchase;
+            model.LastDiv = dto.LastDiv;
+            model.Industry = dto.Industry;
+            model.MarketCap = dto.MarketCap;
+        }
     }
 }

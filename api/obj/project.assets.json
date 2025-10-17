@@ -5187,11 +5187,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/chienhuangsarah/Desktop/FinShark/api/api.csproj",
+      "projectUniqueName": "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj",
       "projectName": "api",
-      "projectPath": "/Users/chienhuangsarah/Desktop/FinShark/api/api.csproj",
+      "projectPath": "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj",
       "packagesPath": "/Users/chienhuangsarah/.nuget/packages/",
-      "outputPath": "/Users/chienhuangsarah/Desktop/FinShark/api/obj/",
+      "outputPath": "/Users/chienhuangsarah/Desktop/Finance/api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/chienhuangsarah/.nuget/NuGet/NuGet.Config"
