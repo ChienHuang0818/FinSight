@@ -1,7 +1,6 @@
 using api.Data;
 using api.Interfaces;
 using api.Models;
-using api.Dtos.Comment;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories
@@ -21,6 +20,11 @@ namespace api.Repositories
                 .AsNoTracking()
                 .OrderBy(c => c.Id)
                 .ToListAsync();
+        }
+
+		public async Task<Comment?> GetByIdAsync(int id)
+        {
+            return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

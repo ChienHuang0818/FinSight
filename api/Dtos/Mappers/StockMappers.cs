@@ -24,7 +24,8 @@ namespace api.Dtos.Mappers
             Purchase = model.Purchase,
             LastDiv = model.LastDiv,
             Industry = model.Industry,
-            MarketCap = model.MarketCap
+            MarketCap = model.MarketCap,
+            Comments = model.Comments.Select(c => c.ToCommentDto()).ToList()
         };
 
         public static void UpdateFromDto(this Models.Stock model, UpdateStockDto dto)
@@ -36,5 +37,6 @@ namespace api.Dtos.Mappers
             model.Industry = dto.Industry;
             model.MarketCap = dto.MarketCap;
         }
+
     }
 }

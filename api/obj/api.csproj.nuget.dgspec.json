@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj": {}
+    "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj": {}
   },
   "projects": {
-    "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj": {
+    "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj",
+        "projectUniqueName": "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/Users/chienhuangsarah/Desktop/Finance/api/api.csproj",
+        "projectPath": "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj",
         "packagesPath": "/Users/chienhuangsarah/.nuget/packages/",
-        "outputPath": "/Users/chienhuangsarah/Desktop/Finance/api/obj/",
+        "outputPath": "/Users/chienhuangsarah/Desktop/FinSight/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/chienhuangsarah/.nuget/NuGet/NuGet.Config"
@@ -44,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.7, )"
@@ -63,6 +67,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[9.0.10, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

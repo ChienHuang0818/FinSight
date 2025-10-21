@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using api.Data; 
 using api.Interfaces;
 using api.Repositories;
+using Newtonsoft.Json;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Controllers
@@ -19,7 +22,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 
-
+builder.Services
+    .AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    });
 
 var app = builder.Build();
 

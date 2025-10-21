@@ -11,11 +11,15 @@ namespace api.Repositories
         private readonly ApplicationDbContext _db;
         public StockRepository(ApplicationDbContext db) => _db = db;
 
-        public async Task<List<Stock>> GetAllAsync() =>
-            await _db.Stocks.AsNoTracking().OrderBy(s => s.Id).ToListAsync();
+        public async Task<List<Stock>> GetAllAsync() 
+            => await _db.Stocks
+            .Include(s => s.Comments)
+            .ToListAsync();
 
-        public async Task<Stock?> GetByIdAsync(int id) =>
-            await _db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+        public async Task<Stock?> GetByIdAsync(int id) 
+            => await _db.Stocks
+            .Include(s => s.Comments)          // IMPORTANT: Include
+            .FirstOrDefaultAsync(s => s.Id == id); 
 
         public async Task<Stock> CreateAsync(Stock stockModel)
         {
@@ -26,7 +30,9 @@ namespace api.Repositories
 
         public async Task<Stock?> UpdateAsync(int id, UpdateStockDto stockDto)
         {
-            var stock = await _db.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+            var stock = await _db.Stocks
+                .Include(s => s.Comments)
+                .FirstOrDefaultAsync(s => s.Id == id);
             if (stock == null) return null;
 
             stock.Symbol = stockDto.Symbol;
