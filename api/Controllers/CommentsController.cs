@@ -10,8 +10,11 @@ namespace api.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly ICommentRepository _repo;
-        public CommentsController(ICommentRepository Commentrepo){
-			_repo = Commentrepo;
+        private readonly IStockRepository _stockRepo;
+        
+        public CommentsController(ICommentRepository commentRepo, IStockRepository stockRepo){
+			_repo = commentRepo;
+			_stockRepo = stockRepo;
 		}
 
         [HttpGet]
@@ -28,5 +31,24 @@ namespace api.Controllers
 			if (comment is null) return NotFound();
 			return Ok(comment.ToCommentDto()); 
 		}
+        [HttpPost]
+        public async Task<IActionResult> Create(int stockId, [FromBody] CreateCommentRequestDto dto)
+        {
+            // Validate parent
+            if (!await _stockRepo.StockExistsAsync(stockId))
+                return BadRequest(new { message = "Stock does not exist." });
+
+            // Map & persist
+            var entity = dto.ToCommentFromCreate(stockId);
+            var created = await _repo.CreateAsync(entity);
+
+            // Return 201 with Location to GET /api/comments/{id}
+            return CreatedAtAction(
+                actionName: nameof(CommentsController.GetById),
+                controllerName: "Comments",
+                routeValues: new { id = created.Id },
+                value: created.ToCommentDto()
+            );
+        }
     }
 }

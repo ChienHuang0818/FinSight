@@ -58,5 +58,8 @@ namespace api.Repositories
 
         public Task<bool> ExistsAsync(int id) =>
             _db.Stocks.AnyAsync(s => s.Id == id);
+
+        public async Task<bool> StockExistsAsync(int id)
+            => await _db.Stocks.AnyAsync(s => s.Id == id);
     }
 }
