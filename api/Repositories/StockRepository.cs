@@ -23,8 +23,26 @@ namespace api.Repositories
 
             if (!string.IsNullOrWhiteSpace(query.Symbol))
                 stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+                
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                var sortBy = query.SortBy.Trim();
+                stocks = sortBy.Equals("symbol", StringComparison.OrdinalIgnoreCase)
+                    ? (query.IsDescending
+                        ? stocks.OrderByDescending(s => s.Symbol)
+                        : stocks.OrderBy(s => s.Symbol))
+                    : stocks;
+            }
 
-            return await stocks.ToListAsync(ct);            
+            var pageNumber = query.PageNumber > 0 ? query.PageNumber : 1;
+            var pageSize = query.PageSize > 0 ? query.PageSize : 20;
+            var skipNumber = (pageNumber - 1) * pageSize;
+
+            return await stocks
+                .Skip(skipNumber)
+                .Take(pageSize)
+                .ToListAsync(ct);
+           
         }
 
         public async Task<Stock?> GetByIdAsync(int id) 
