@@ -32,6 +32,12 @@ namespace api.Dtos.Mappers
                 StockId = stockId,
                 CreatedOn = DateTime.UtcNow
             };
+
+        public static void UpdateFromDto(this CommentModel comment, UpdateCommentRequestDto dto)
+        {
+            comment.Title = dto.Title;
+            comment.Content = dto.Content;
         }
+    }
 
 }

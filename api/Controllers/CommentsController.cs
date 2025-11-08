@@ -50,5 +50,24 @@ namespace api.Controllers
                 value: created.ToCommentDto()
             );
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateCommentRequestDto dto)
+        {
+            var comment = await _repo.GetByIdAsync(id);
+            if (comment is null) return NotFound();
+            comment.UpdateFromDto(dto);
+            await _repo.UpdateAsync(comment);
+            return Ok(comment.ToCommentDto());
+        }
+        
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var comment = await _repo.GetByIdAsync(id);
+            if (comment is null) return NotFound();
+            await _repo.DeleteAsync(comment);
+            return Ok(comment.ToCommentDto());
+        }
     }
 }

@@ -5343,11 +5343,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj",
+      "projectUniqueName": "/Users/chienhuangsarah/Desktop/Git/FinSight/api/api.csproj",
       "projectName": "api",
-      "projectPath": "/Users/chienhuangsarah/Desktop/FinSight/api/api.csproj",
+      "projectPath": "/Users/chienhuangsarah/Desktop/Git/FinSight/api/api.csproj",
       "packagesPath": "/Users/chienhuangsarah/.nuget/packages/",
-      "outputPath": "/Users/chienhuangsarah/Desktop/FinSight/api/obj/",
+      "outputPath": "/Users/chienhuangsarah/Desktop/Git/FinSight/api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/chienhuangsarah/.nuget/NuGet/NuGet.Config"
