@@ -3,6 +3,7 @@ using api.Dtos.Stock;
 using api.Dtos.Mappers;       
 using api.Interfaces;
 using api.Models;
+using api.Helpers;
 
 namespace api.Controllers
 {
@@ -15,10 +16,15 @@ namespace api.Controllers
 
         // GET: /api/stocks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StockDto>>> GetAll(CancellationToken ct)
-        {
-            var items = await _repo.GetAllAsync();
-            return Ok(items.Select(s => s.ToStockDto()));
+        public async Task<ActionResult<IEnumerable<StockDto>>> GetAll([FromQuery] QueryObject? query, CancellationToken ct)
+        {   
+            if(!ModelState.IsValid) 
+                return ValidationProblem(ModelState);
+
+            var stocks = await _repo.GetAllAsync(query ?? new QueryObject(), ct);
+            var stockDtos = stocks.Select(s => s.ToStockDto()).ToList();
+
+            return Ok(stocks);
         }
 
         // GET: /api/stocks/{id}

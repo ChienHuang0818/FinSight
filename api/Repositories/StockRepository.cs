@@ -1,4 +1,7 @@
+using System.Linq;
+using System.Threading;
 using api.Data;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using api.Dtos.Stock;
@@ -11,10 +14,18 @@ namespace api.Repositories
         private readonly ApplicationDbContext _db;
         public StockRepository(ApplicationDbContext db) => _db = db;
 
-        public async Task<List<Stock>> GetAllAsync() 
-            => await _db.Stocks
-            .Include(s => s.Comments)
-            .ToListAsync();
+        public async Task<List<Stock>> GetAllAsync(QueryObject query, CancellationToken ct)
+        {
+            var stocks = _db.Stocks.AsQueryable();   
+
+            if (!string.IsNullOrWhiteSpace(query.CompanyName))
+                stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+
+            if (!string.IsNullOrWhiteSpace(query.Symbol))
+                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+
+            return await stocks.ToListAsync(ct);            
+        }
 
         public async Task<Stock?> GetByIdAsync(int id) 
             => await _db.Stocks
